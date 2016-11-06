@@ -66,8 +66,8 @@ describe('app.js', () => {
             const validemail  = 'jstoecklmair.mmt-m2016@fh-salzburg.ac.at';
             const validemail2 = 'jstoecklmair.heb-b2016@fh-salzburg.ac.at';
 
-            expect(app.level(validemail)).to.equal('master');
-            expect(app.level(validemail2)).to.equal('bachelor');
+            expect(app.level(validemail)).to.equal('MA');
+            expect(app.level(validemail2)).to.equal('BA');
 
             done();
         });
