@@ -19,10 +19,17 @@ module.exports = function(grunt) {
       }
     },
 
+    run: {
+      test: {
+        cmd: 'npm',
+        args: ['test']
+      }
+    },
+
     watch: {
       js: {
         files: ['src/**/*.js'],
-        tasks: ['browserify']
+        tasks: ['browserify', 'test']
       }
     }
   })
@@ -31,5 +38,6 @@ module.exports = function(grunt) {
       'watch'
     ]
   )
+  grunt.registerTask('test', ['run:test'])
 
 }
