@@ -8,29 +8,39 @@ import {
 
 describe('01-modules', () => {
   describe('#valid()', () => {
-    it.skip('should be a valid FH/MMT email', () => {
+    it('should be a valid FH/MMT email', done => {
       valid('hmoser.mmt-b2015@fh-salzburg.ac.at').should.be.true()
+
+      done()
     })
-    it.skip('should be an invalid FH/MMT email', () => {
+    it('should be an invalid FH/MMT email', done => {
       valid('hannes.moser@fh-salzburg.ac.at').should.be.false()
+
+      done()
     })
   })
 
   describe('#degreeProgram()', () => {
-    it.skip('should match MMT', () => {
+    it('should match MMT', done => {
       degreeProgram('hmoser.mmt-b2015@fh-salzburg.ac.at').should.eql('MMT')
+
+      done()
     })
   })
 
   describe('#level()', () => {
-    it.skip('should match BA or MA', () => {
+    it('should match BA or MA', done => {
       level('hmoser.mmt-b2015@fh-salzburg.ac.at').should.eql('BA')
+
+      done()
     })
   })
 
   describe('#graduationYear()', () => {
-    it.skip('should be your graduation year', () => {
+    it('should be your graduation year', done => {
       graduationYear('hmoser.mmt-b2015@fh-salzburg.ac.at').should.eql(2018)
+
+      done()
     })
   })
 })
