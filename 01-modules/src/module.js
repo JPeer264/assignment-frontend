@@ -10,9 +10,13 @@
 // Group 5. the email adress of fh-salzburg.ac.at
 const re = /(\w+\.(\w+)-(\w{1})(\d{4}))?@(fh-salzburg\.ac\.at)/g;
 
-export function valid (email, focusEmail=false) {
+let app = module.exports = {}
+
+app.valid = function (email, focusEmail) {
     const regex = new RegExp(re);
     const execEmail = regex.exec(email);
+
+    focusEmail = focusEmail || false;
 
     // fail fast no match
     if (!execEmail) {
@@ -34,7 +38,7 @@ export function valid (email, focusEmail=false) {
     return false;
 }
 
-export function degreeProgram (email) {
+app.degreeProgram = function (email) {
     const regex = new RegExp(re);
     const execEmail = regex.exec(email);
 
@@ -59,7 +63,7 @@ export function degreeProgram (email) {
     return false
 }
 
-export function level (email) {
+app.level = function (email) {
     const regex = new RegExp(re);
     const execEmail = regex.exec(email);
 
@@ -96,7 +100,7 @@ export function level (email) {
     return false;
 }
 
-export function graduationYear (email) {
+app.graduationYear = function (email) {
     const regex = new RegExp(re);
     const execEmail = regex.exec(email);
 

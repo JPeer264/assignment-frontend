@@ -22,3 +22,16 @@ router('/', index)
 router('/contact', contact)
 router('*', notFound)
 router()
+
+
+$(document).ready(function() {
+    $('.link').click(e => {
+        // e.preventDefault();
+
+        let $this = $(this);
+
+        console.log($this)
+
+        e.preventDefault();
+    });
+});
