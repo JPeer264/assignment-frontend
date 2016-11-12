@@ -3,13 +3,15 @@ const app    = require('../module');
 
 describe('app.js', () => {
     describe('valid', () => {
-        it('should have a valid university email', done => {
-            const validemail  = 'jstoecklmair.mmt-m@fh-salzburg.ac.at';
+        it('have a valid university mail', () => {
+            const validem  = 'jstoecklmair.mmt-m2016@fh-salzburg.ac.at';
+            const validem2 = 'fhs39850@fh-salzburg.ac.at';
 
-            expect(app.valid(validemail)).to.be.true;
+            expect(app.valid(validem)).to.be.true;
+            expect(app.valid(validem2, true)).to.be.true;
         });
 
-        it('should fail', done => {
+        it('should fail', () => {
             const nonvalieemail  = 'janpeer264@gmail.com';
             const nonvalieemail2 = 'goofy@example.com';
             const nonvalieemail3 = 'fhs39850@fh-salzburg.ac.at';
@@ -17,73 +19,60 @@ describe('app.js', () => {
             expect(app.valid(nonvalieemail)).to.be.false;
             expect(app.valid(nonvalieemail2)).to.be.false;
             expect(app.valid(nonvalieemail3)).to.be.false;
-
-            done();
         });
     });
 
-    describe('degreeProgramm', () => {
-        it('should have a valid university email', done => {
+    describe('degreeProgram', () => {
+        it('should have a valid university email', () => {
             const validemail  = 'jstoecklmair.mmt-m2016@fh-salzburg.ac.at';
             const validemail2 = 'jstoecklmair.heb-b2016@fh-salzburg.ac.at';
 
-            expect(app.degreeProgramm(validemail)).to.equal('MMT');
-            expect(app.degreeProgramm(validemail2)).to.equal('HEB');
-
-            done();
+            expect(app.degreeProgram(validemail)).to.equal('MMT');
+            expect(app.degreeProgram(validemail2)).to.equal('HEB');
         });
 
-        it('should fail - valid but not defined programm', done => {
+        it('should fail - valid but not defined programm', () => {
             const notClear = 'fhs39850@fh-salzburg.ac.at';
-
-            const programmOne = app.degreeProgramm(notClear);
+            const programmOne = app.degreeProgram(notClear);
 
             expect(programmOne).to.be.an('object');
             expect(programmOne.code).to.equal('EUNSURE');
-
-            done();
         });
 
-        it('should fail - not valid university mail', done => {
+        it('should fail - not valid university mail', () => {
             const nonvalieemail  = 'janpeer264@gmail.com';
             const nonvalieemail2 = 'goofy@example.com';
 
-            const programmOne = app.degreeProgramm(nonvalieemail);
-            const programmTwo = app.degreeProgramm(nonvalieemail2);
+            const programmOne = app.degreeProgram(nonvalieemail);
+            const programmTwo = app.degreeProgram(nonvalieemail2);
 
             expect(programmOne).to.be.an('object');
             expect(programmTwo).to.be.an('object');
 
             expect(programmOne.code).to.equal('ENOSTUDY');
             expect(programmTwo.code).to.equal('ENOSTUDY');
-
-            done();
         });
     });
 
     describe('level', () => {
-        it('should have a valid university email', done => {
+        it('should have a valid university email', () => {
             const validemail  = 'jstoecklmair.mmt-m2016@fh-salzburg.ac.at';
             const validemail2 = 'jstoecklmair.heb-b2016@fh-salzburg.ac.at';
 
             expect(app.level(validemail)).to.equal('MA');
             expect(app.level(validemail2)).to.equal('BA');
-
-            done();
         });
 
-        it('should fail - valid but not defined programm', done => {
+        it('should fail - valid but not defined programm', () => {
             const notClear = 'fhs39850@fh-salzburg.ac.at';
 
             const programmOne = app.level(notClear);
 
             expect(programmOne).to.be.an('object');
             expect(programmOne.code).to.equal('EUNSURE');
-
-            done();
         });
 
-        it('should fail - not valid university mail', done => {
+        it('should fail - not valid university mail', () => {
             const nonvalieemail  = 'janpeer264@gmail.com';
             const nonvalieemail2 = 'goofy@example.com';
 
@@ -95,13 +84,11 @@ describe('app.js', () => {
 
             expect(programmOne.code).to.equal('ENOSTUDY');
             expect(programmTwo.code).to.equal('ENOSTUDY');
-
-            done();
         });
     });
 
     describe('graduationYear', () => {
-        it('should predict right graduation year', done => {
+        it('should predict right graduation year', () => {
             const validemail  = 'jstoecklmair.mmt-m2013@fh-salzburg.ac.at';
             const validemail2 = 'jstoecklmair.heb-b2016@fh-salzburg.ac.at';
             const validemail3 = 'jstoecklmair.mmt-m2016@fh-salzburg.ac.at';
@@ -109,22 +96,18 @@ describe('app.js', () => {
             expect(app.graduationYear(validemail)).to.equal(2015);
             expect(app.graduationYear(validemail2)).to.equal(2019);
             expect(app.graduationYear(validemail3)).to.equal(2018);
-
-            done();
         });
 
-        it('should fail - valid but not defined programm', done => {
+        it('should fail - valid but not defined programm', () => {
             const notClear = 'fhs39850@fh-salzburg.ac.at';
 
             const programmOne = app.graduationYear(notClear);
 
             expect(programmOne).to.be.an('object');
             expect(programmOne.code).to.equal('EUNSURE');
-
-            done();
         });
 
-        it('should fail - not valid university mail', done => {
+        it('should fail - not valid university mail', () => {
             const nonvalieemail  = 'janpeer264@gmail.com';
             const nonvalieemail2 = 'goofy@example.com';
 
@@ -136,8 +119,6 @@ describe('app.js', () => {
 
             expect(programmOne.code).to.equal('ENOSTUDY');
             expect(programmTwo.code).to.equal('ENOSTUDY');
-
-            done();
         });
     });
 });
