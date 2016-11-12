@@ -4,11 +4,11 @@
 // anywords.anywords-a2016@fh-salzburg.ac.at
 // also captures just @fh-salzburg.ac.at if the rest is not valid
 // (Group 1). optional group from start until @ (excluding @) with following syntax: anywords.anywords-a2016@
-// Group 2. any words (e.g. mmt)
-// Group 3. one letter, master or bachelor (e.g. m)
+// Group 2. any words, after the first dot (e.g. mmt)
+// Group 3. one letter, master or bachelor, after the first (e.g. m)
 // Group 4. the years with 4 digits (e.g. 2016)
 // Group 5. the email adress of fh-salzburg.ac.at
-const re = /(\w+\.(\w+)-(\w{1})(\d{4}))?@(fh-salzburg\.ac\.at)/g;
+const re = /(\w+\.(\w+)-(\w{1})(\d{4}))?@(fh-salzburg\.ac\.at)/;
 
 const app = module.exports = {}
 
