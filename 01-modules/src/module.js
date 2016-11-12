@@ -10,8 +10,16 @@
 // Group 5. the email adress of fh-salzburg.ac.at
 const re = /(\w+\.(\w+)-(\w{1})(\d{4}))?@(fh-salzburg\.ac\.at)/g;
 
-let app = module.exports = {}
+const app = module.exports = {}
 
+/**
+ * checks if the email is an valid student email and/or university email
+ *
+ * @param  {String}             email
+ * @param  {Boolean} focusEmail true checks if it is the right university mail
+ *
+ * @return {Boolean}
+ */
 app.valid = function (email, focusEmail) {
     const regex = new RegExp(re);
     const execEmail = regex.exec(email);
@@ -38,6 +46,13 @@ app.valid = function (email, focusEmail) {
     return false;
 }
 
+/**
+ * the program of the student
+ *
+ * @param  {String} email
+ *
+ * @return {Object | String} shortcut of the study program
+ */
 app.degreeProgram = function (email) {
     const regex = new RegExp(re);
     const execEmail = regex.exec(email);
@@ -63,6 +78,13 @@ app.degreeProgram = function (email) {
     return false
 }
 
+/**
+ * defines the students level
+ *
+ * @param  {String} email
+ *
+ * @return {Object | String} the level of the student - MA or BA
+ */
 app.level = function (email) {
     const regex = new RegExp(re);
     const execEmail = regex.exec(email);
@@ -100,6 +122,13 @@ app.level = function (email) {
     return false;
 }
 
+/**
+ * calculates when the student should be finished with the studies
+ *
+ * @param  {String} email
+ *
+ * @return {Object | Number} either an error object, or the expected year
+ */
 app.graduationYear = function (email) {
     const regex = new RegExp(re);
     const execEmail = regex.exec(email);
