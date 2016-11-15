@@ -8,6 +8,10 @@ import notFoundTpl from './templates/not-found.hbs'
 
 const $app = $('#app')
 
+if (!check.isPushStateAvailable()) {
+    throw new Error('Your browser does not support this routing.');
+}
+
 function index() {
     $app.html(homeTpl())
 }
@@ -28,6 +32,5 @@ router.registerRoute('/', index)
 router.registerRoute('/contact', contact)
 router.registerRoute('/player/:name', player)
 router.registerRoute('*', notFound)
-router.registerRoute()
 
 router.start()

@@ -2,9 +2,6 @@
 
 import $ from 'jquery'
 
-// todo add popstate
-// do not add a click eventhandler to all a-tags
-
 /**
  * a router to prevent reloading and change the states
  * unlimited parameter support
@@ -21,6 +18,7 @@ class Router {
             firstSlash: /^\//,
             allSlash: /^\/*/,
             firstDoublePoint: /^:+/,
+            isOwnPage: /^\/{1}[\w\d]+|^\/$/, // checks if the path starts / followed by any word character or any digit OR just a slash
         };
     }
 
@@ -34,12 +32,24 @@ class Router {
 
         self.goTo(window.location.pathname)
 
+        // add popstate listener
+        window.onpopstate = (e) => {
+            self.goTo(e.state.path);
+        }
+
+        // add click event listeners
         $('a').click(function (e) {
             const $this = $(this);
+            const href = $this.attr('href')
+
+            // no routing for non-internal links
+            if (!href.match(self.regex.isOwnPage) || !!href.match(window.location.hostname)) {
+                return
+            }
 
             e.preventDefault();
 
-            self.goTo($this.attr('href'))
+            self.goTo(href)
         });
     }
 
@@ -54,8 +64,16 @@ class Router {
     registerRoute (path, template) {
         const self = this;
 
-        if (!path) {
+        if (!path || !template) {
             return
+        }
+
+        if (typeof path !== 'string') {
+            throw new Error('The path is not a string');
+        }
+
+        if (typeof template !== 'function') {
+            throw new Error('The template is not a function');
         }
 
         if (path.match(self.regex.parameter)) {
@@ -155,9 +173,9 @@ class Router {
     updateURI (path) {
         const self = this;
 
-        path = path || '/';
+        path = path.replace(self.regex.allSlash, '/') || '/';
 
-        window.history.pushState("", "", path.replace(self.regex.allSlash, '\/'));
+        window.history.pushState({ path }, "", path);
     }
 
     /**
