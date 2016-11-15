@@ -75,12 +75,16 @@ module.exports = function(grunt) {
     },
 
     watch: {
+      options: {
+        livereload: true
+      },
       js: {
         files: ['./src/**/*.js', './src/**/*.hbs'],
-        tasks: ['browserify:watch'],
-        options: {
-          livereload: true
-        }
+        tasks: ['browserify:watch']
+      },
+      html: {
+        files: './src/**/*.html',
+        tasks: 'copy:dist'
       }
     }
   })
