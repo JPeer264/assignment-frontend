@@ -5,6 +5,10 @@ import $ from 'jquery'
 // todo add popstate
 // do not add a click eventhandler to all a-tags
 
+/**
+ * a router to prevent reloading and change the states
+ * unlimited parameter support
+ */
 class Router {
     constructor () {
         const self = this;
@@ -62,7 +66,6 @@ class Router {
 
         // register paths
         self.registeredRoutes[path] = template;
-
     }
 
     /**
