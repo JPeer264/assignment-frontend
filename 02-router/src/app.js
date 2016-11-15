@@ -20,17 +20,17 @@ function contact() {
     $app.html(contactTpl())
 }
 
-function notFound() {
-    $app.html(notFoundTpl())
-}
-
 function player(context) {
     $app.html(playerTpl(context.params))
 }
 
-router.registerRoute('/', index)
-router.registerRoute('/contact', contact)
-router.registerRoute('/player/:name', player)
-router.registerRoute('*', notFound)
+function notFound() {
+    $app.html(notFoundTpl())
+}
 
-router.start()
+router
+    .on('/', index)
+    .on('/contact', contact)
+    .on('/player/:name', player)
+    .on('*', notFound)
+    .start()

@@ -26,15 +26,17 @@ class Router {
      * start the router after registrating them
      * initialize the first state
      * add eventlisteners to all internal routes
+     *
+     * @return {undefined}
      */
     start () {
         const self = this;
 
-        self.goTo(window.location.pathname)
+        self.render(window.location.pathname)
 
         // add popstate listener
         window.onpopstate = (e) => {
-            self.goTo(e.state.path);
+            self.render(e.state.path);
         }
 
         // add click event listeners
@@ -49,7 +51,7 @@ class Router {
 
             e.preventDefault();
 
-            self.goTo(href)
+            self.render(href)
         });
     }
 
@@ -59,13 +61,13 @@ class Router {
      * @param  {String}     path     the path to go
      * @param  {Function}   template the template to execute
      *
-     * @return {undefined}
+     * @return {this}
      */
-    registerRoute (path, template) {
+    on (path, template) {
         const self = this;
 
         if (!path || !template) {
-            return
+            return self;
         }
 
         if (typeof path !== 'string') {
@@ -79,11 +81,13 @@ class Router {
         if (path.match(self.regex.parameter)) {
             self.registeredDynamicRoutes[path] = template;
 
-            return
+            return self;
         }
 
         // register paths
         self.registeredRoutes[path] = template;
+
+        return self;
     }
 
     /**
@@ -91,9 +95,9 @@ class Router {
      *
      * @param  {String} path the path to go to
      *
-     * @return {undefined}
+     * @return {this}
      */
-    goTo (path) {
+    render (path) {
         const self = this;
 
         let dynamicPath;
@@ -113,7 +117,7 @@ class Router {
             if (typeof self.registeredRoutes[path] === 'function' && self.registeredRoutes[path] !== undefined) {
                 self.registeredRoutes[path]();
 
-                return;
+                return self;
             }
         }
 
@@ -153,7 +157,7 @@ class Router {
                 self.registeredDynamicRoutes[dynamicPath](dynamicParams)
             }
 
-            return
+            return self;
         }
 
           /////////
@@ -163,6 +167,8 @@ class Router {
         if (typeof self.registeredRoutes['*'] === 'function' && self.registeredRoutes['*'] !== undefined) {
             self.registeredRoutes['*']();
         }
+
+        return self;
     }
 
     /**
