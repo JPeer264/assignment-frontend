@@ -1,10 +1,10 @@
 import $ from 'jquery'
 import router from './router'
 import homeTpl from './templates/home.hbs'
-import magnusTpl from './templates/magnus.hbs'
-import sergeyTpl from './templates/sergey.hbs'
+import playerTpl from './templates/player.hbs'
 import contactTpl from './templates/contact.hbs'
 import notFoundTpl from './templates/not-found.hbs'
+import playerData from './data/player.json'
 
 const $app = $('#app')
 
@@ -17,16 +17,7 @@ function contact() {
 }
 
 function players(ctx) {
-  let tpl = () => {}
-  switch (ctx.params.player) {
-    case 'magnus':
-      tpl = magnusTpl
-      break;
-    case 'sergey':
-      tpl = sergeyTpl
-      break;
-  }
-  $app.html(tpl())
+  $app.html(playerTpl(playerData[ctx.params.player]))
 }
 
 function notFound() {
