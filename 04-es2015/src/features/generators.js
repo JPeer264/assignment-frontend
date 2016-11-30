@@ -15,5 +15,10 @@ export function es5(n) {
 }
 
 // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Statements/function*
-export function es6(n) {
+export function* es6(n) {
+  let index = 0;
+
+  while(index < n) {
+    yield index += 1
+  }
 }

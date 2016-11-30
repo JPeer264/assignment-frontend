@@ -11,4 +11,15 @@ export function es5() {
 }
 
 export function es6() {
+  function d(spec){
+    let sum = 0;
+
+    for (let key in spec){
+      sum += spec[key];
+    }
+
+    return sum
+  }
+
+  return d
 }

@@ -15,7 +15,7 @@ export default function() {
     o.spread([1, 2]).should.eql(3)
   })
 
-  it.skip('should show default,rest and spread syntax in ES6', () => {
+  it('should show default,rest and spread syntax in ES6', () => {
     var o = es6()
     o.defaults().should.eql(12)
     o.defaults(5).should.eql(5)
