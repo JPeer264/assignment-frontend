@@ -15,7 +15,7 @@ export function es5() {
     for (var i = 0; i < n; i += 1) {
       sum += i
     }
-    return i
+    return sum
   }
 
   o.constants = constants
