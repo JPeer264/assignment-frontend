@@ -8,4 +8,12 @@ export function es5() {
 }
 
 export function es6() {
+    const o = {
+        i: 0,
+        next(){
+            return o.i+=1
+        }
+    };
+
+    return o
 }
