@@ -8,6 +8,8 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw=" crossorigin="anonymous"></script>
   <style>
     nav a + a {
       padding-left: 10px;
@@ -99,6 +101,70 @@
       -webkit-animation: offsetAnim 4.2s ease-in-out infinite alternate;
       animation: offsetAnim 4.2s ease-in-out infinite alternate;
     }
+    .a-better-button {
+      background: #428D3A;
+      text-align: center;
+      display: inline-block;
+      width: 150px;
+      padding: .8rem 2rem;
+      color: white;
+      border-radius: 5px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0px 2px 11px -4px rgba(0,0,0,0.75);
+    }
+
+    .a-better-button:hover .a-better-confirm {
+      opacity: 1;
+    }
+
+    .a-better-confirm {
+      background: #5DBA58;
+      width: inherit;
+      display: inherit;
+      padding: inherit;
+      position: absolute;
+      border-radius: inherit;
+      top: 0;
+      right: 75%;
+      box-shadow: inset 0px 2px 11px -4px rgba(0,0,0,0.75);
+      opacity: 0;
+      cursor: pointer;
+
+      transition: opacity 300ms, background 500ms 230ms;
+    }
+
+    .a-better-confirm:after {
+      content: '>';
+      position: absolute;
+      height: 100%;
+      right: 16px;
+      font-size: 13px;
+    }
+
+    .a-better-confirm span {
+      opacity: 0;
+
+      transition: inherit;
+    }
+
+    .a-better-confirm--confirmed {
+      opacity: 1;
+      cursor: initial;
+    }
+
+    .a-better-confirm--confirmed:after {
+      content: none;
+    }
+
+    .a-better-confirm--confirmed span {
+      opacity: 1;
+    }
+
+    .show {
+      opacity: 1;
+      visibility: visible;
+    }
 
     @-webkit-keyframes offsetAnim {
       0% {
@@ -119,6 +185,7 @@
         stroke-dashoffset: 3.5em;
       }
     }
+
   </style>
 </head>
 <body>

@@ -7,6 +7,8 @@ import textTpl from './templates/text.hbs'
 import interactionTpl from './templates/interaction.hbs'
 import notFoundTpl from './templates/not-found.hbs'
 
+import './app/aBetterButton'
+
 const app = document.getElementById('app')
 
 function index() {
